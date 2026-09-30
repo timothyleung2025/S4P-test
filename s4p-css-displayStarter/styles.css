@@ -1,0 +1,84 @@
+        p{
+            color:blue;
+            font-size: 18 px;
+        }
+
+        .highlight{
+              background-color: yellow; 
+              font-weight: bold; 
+        }
+        #special{
+            color: red; 
+
+            text-decoration: underline; 
+        }
+
+        .fancy-text{
+            font-family:"Arial", sans-serif;
+            font-size: 20px;
+            color: darkblue;
+        }
+        .google-font{
+            font-family: "Roboto", sans-serif;
+        }
+
+        .position-demo {
+	border: 2px dashed gray; 
+	margin: 20px 0; 
+	padding: 20px; 
+	height: 300px; 
+	overflow: auto;  
+	position: relative; 
+} 
+
+/* Static (default) */ 
+.static-box { 
+	position: static;  
+	background: lightblue; 
+	padding: 10px; 
+	margin-bottom: 10px; 
+} 
+
+/* Relative */ 
+.relative-box { 
+	position: relative; 
+	left: 20px;  
+	top: 10px;  
+	background: lightgreen; 
+	padding: 10px; 
+	margin-bottom: 10px; 
+}  
+
+/* Absolute */ 
+.absolute-box { 
+	position: absolute;
+	top: 40px; 
+	right: 10px; 
+	background: pink; 
+	padding: 10px; 
+} 
+
+/* Fixed */ 
+.fixed-box { 
+	position: fixed; 
+	bottom: 10px; 
+	right: 10px; 
+	background: orange; 
+	padding: 10px; 
+} 
+
+/* Sticky */ 
+.sticky-box { 
+	position: sticky; 
+	top: 0; 
+	background: yellow; 
+	padding: 10px; 
+} 
+
+        /* .hosted-font{
+            font-family: 'GhastlyPanic';
+            src: url('../GhastlyPanic.ttf');
+
+
+        }
+  */

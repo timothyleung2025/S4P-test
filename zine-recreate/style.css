@@ -1,0 +1,58 @@
+/* Page colors and text */
+body {
+  background-color: cornflowerblue;
+  color: cornsilk;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 10px;
+}
+
+h1 {
+  font-size: 64px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* A border underneath each publication */
+.publications p {
+  border-bottom: 1px solid cornsilk;
+  padding: 6px 0;
+  margin: 0;
+}
+
+.headings {
+  font-size: 24px;
+  border-top: 1px solid cornsilk;
+}
+
+/* Inline-block lets each span have a width. */
+.publications span {
+  display: inline-block;
+}
+
+.number {
+  width: 12%;
+}
+
+.title {
+  width: 45%;
+}
+
+.author {
+  width: 28%;
+}
+
+.mobile {
+  width: 10%;
+}
+
+.sound-note {
+  font-size: 14px;
+}
+
+/* About the project */
+.about {
+  width: 90%;
+  margin-top: 60px;
+  border-top: 1px solid cornsilk;
+}
