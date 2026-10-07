@@ -1,0 +1,451 @@
+/* each poem gets its own paper + ink, like different pages in the same zine */
+/* these variables save me from typing the same colors over and over */
+:root {
+  --backdrop: #dec3c8;
+  --paper: #faf2e7;
+  --ink: #293b32;
+  --accent: #245b46;
+  --highlight: #ecd0d5;
+}
+
+/* lavender and plum for accents. changing these colors updates the whole page */
+.accents-page {
+  --backdrop: #c6b4d0;
+  --paper: #f3edf7;
+  --ink: #35283d;
+  --accent: #653a77;
+  --highlight: #dfc9eb;
+}
+
+/* this one feels like an old letter. parchment, brown ink, a little gold */
+.gift-page {
+  --backdrop: #c9bb9c;
+  --paper: #f7efdc;
+  --ink: #3d3328;
+  --accent: #79502e;
+  --highlight: #e6d5af;
+}
+
+/* sage paper and yellow highlights for flowers, like a garden notebook */
+.flowers-page {
+  --backdrop: #b8c7a7;
+  --paper: #f4f3e3;
+  --ink: #303c2b;
+  --accent: #435c32;
+  --highlight: #ede2a1;
+}
+
+/* midnight blue for this one, like a stage before the lights come up */
+.real-page {
+  --backdrop: #18243e;
+  --paper: #e9eff6;
+  --ink: #25324a;
+  --accent: #294b80;
+  --highlight: #c7d8ed;
+}
+
+/* this title is long, so it gets a smaller size and can wrap if needed */
+.real-page h1 {
+  font-size: clamp(52px, 9vw, 100px);
+  overflow-wrap: anywhere;
+}
+
+/* the lines step inward when the strings pull, then open back up */
+.real-stanza {
+  margin: 0 0 42px;
+}
+
+/* block puts each span on its own line, even though spans are normally inline */
+.poem-line {
+  display: block;
+}
+
+/* one step inward. clamp sets a minimum, a flexible size, and a maximum */
+.real-page .indent-1 {
+  margin-left: clamp(18px, 4vw, 40px);
+}
+
+/* a second step inward for the lines that feel more pulled by the strings */
+.real-page .indent-2 {
+  margin-left: clamp(36px, 8vw, 80px);
+}
+
+/* the last bit gets its own space */
+.final-moment {
+  margin-top: 28px;
+  padding: 24px;
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.final-moment em {
+  color: var(--paper);
+}
+
+/* a small number in the margin gives each part a place to start */
+.flower-stanza {
+  position: relative;
+  padding: 24px 0 28px 44px;
+  border-bottom: 1px solid var(--highlight);
+}
+
+/* absolute places the number relative to its section, which is position: relative */
+.stanza-number {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  margin: 0;
+  color: var(--accent);
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  line-height: 1.7;
+}
+
+.flower-stanza:last-child {
+  border-bottom: 0;
+}
+
+/* the last word opens up and gets its own patch of sunlight */
+.bloom {
+  display: block;
+  width: fit-content;
+  margin-top: 36px;
+  padding: 12px 24px;
+  background: var(--highlight);
+  color: var(--accent);
+  font-size: clamp(54px, 10vw, 100px);
+  font-style: italic;
+  line-height: 1.1;
+  border-radius: 50% 45% 48% 42%;
+  transform: rotate(-3deg);
+}
+
+/* a quieter ending for this poem, like a note tucked away for later */
+.gift-ending {
+  display: block;
+  margin-top: 35px;
+  padding: 20px 24px;
+  background: var(--highlight);
+  color: var(--accent);
+  font-size: clamp(26px, 5vw, 42px);
+  font-style: italic;
+  line-height: 1.3;
+  border-bottom: 2px solid var(--accent);
+}
+/* padding and borders count inside the width instead of making things wider */
+* {
+  box-sizing: border-box;
+}
+
+/* the body sets the background and default text style for the whole page */
+body {
+  margin: 0;
+  background-color: var(--backdrop);
+  /* tiny dots give the outside a printed-paper feel without needing an image */
+  background-image: radial-gradient(#0000000d 0.6px, transparent 0.6px);
+  background-size: 4px 4px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(16px, 2vw, 21px);
+  line-height: 1.7;
+  border-top: 12px solid var(--accent);
+}
+
+/* auto margins center the page; padding keeps the words off the edges */
+main {
+  max-width: 880px;
+  margin: 36px auto;
+  padding: 70px 40px 100px;
+  background: var(--paper);
+  border: 1px solid #00000012;
+  box-shadow: 7px 9px 0 #00000008, 0 12px 35px #0000000d;
+}
+
+/* a thin line separates the title and author from the actual poem */
+header {
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 30px;
+  margin-bottom: 35px;
+}
+
+/* links dressed up as tabs. the filled one is the poem you're reading */
+/* flex puts the links beside each other; wrap lets them move onto another row */
+.poem-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 45px;
+  border-bottom: 1px solid var(--accent);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* the four radius values go top-left, top-right, bottom-right, bottom-left */
+.poem-tabs a {
+  border: 1px solid var(--accent);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 18px;
+  text-decoration: none;
+}
+
+/* this only selects the link marked as the current page in the HTML */
+.poem-tabs a[aria-current="page"] {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+/* spans let me move individual lines inward */
+.accents-page .indent {
+  display: inline-block;
+  margin-left: 1.5em;
+}
+
+.accents-page .step {
+  margin-left: 3em;
+}
+
+/* her voice gets bigger than the regular text */
+.voice {
+  margin: 50px 0;
+  color: var(--accent);
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.35;
+}
+
+.callout {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--accent);
+  font-size: 1.5em;
+  font-style: italic;
+  transform: rotate(-3deg);
+}
+
+/* plum ink becomes the background when the rhythm picks up */
+.rhythm {
+  background: var(--accent);
+  color: var(--paper);
+  padding: 28px;
+  margin: 40px 0;
+  font-size: 1.3em;
+  line-height: 1.5;
+}
+
+.salsa {
+  display: inline-block;
+  color: var(--accent);
+  font-weight: bold;
+  animation: sway 4s ease-in-out infinite alternate;
+}
+
+/* ending on home, with a little extra space to let it land */
+.home {
+  display: block;
+  margin: 24px 0 0 0.5em;
+  color: var(--accent);
+  font-size: clamp(36px, 7vw, 64px);
+  font-style: italic;
+  line-height: 1.2;
+}
+
+/* clamp lets the title grow with the screen without getting too huge */
+h1 {
+  color: var(--accent);
+  font-size: clamp(64px, 12vw, 130px);
+  font-weight: normal;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  margin: 0 0 30px;
+}
+
+.byline {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* a little space after paragraphs keeps the stanzas from running together */
+p {
+  margin: 0 0 24px;
+}
+
+h2,
+h3 {
+  font-weight: normal;
+  line-height: 1.3;
+}
+
+h3 {
+  color: var(--accent);
+  font-size: 1.25em;
+  font-style: italic;
+}
+
+/* a little color on the words that already have emphasis */
+b,
+em {
+  color: var(--accent);
+}
+
+/* underline-offset leaves some breathing room between a link and its underline */
+a {
+  color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  transition: background-color 180ms ease;
+}
+
+/* hover is for the mouse; focus-visible gives keyboard users feedback too */
+a:hover,
+a:focus-visible {
+  background-color: var(--highlight);
+}
+
+/* these lines get their own rhythm once the music starts */
+.dance,
+.refrain h2 {
+  font-size: clamp(45px, 8vw, 85px);
+  color: var(--accent);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+/* a negative angle tilts this line slightly to the left */
+.dance {
+  transform: rotate(-4deg);
+  margin: 45px 0 60px;
+}
+
+/* border-left draws the line; padding keeps the words from touching it */
+.questions {
+  border-left: 3px solid var(--accent);
+  padding: 20px 0 20px 28px;
+}
+
+/* small side-to-side movement, like swaying instead of racing across the page */
+.refrain {
+  background-color: var(--accent);
+  padding: 35px 25px;
+  margin: 30px 0;
+}
+
+.refrain h2 {
+  color: var(--paper);
+  margin: 0;
+  animation: sway 4s ease-in-out infinite alternate;
+}
+
+/* from and to are the two poses. alternate makes the animation move back and forth */
+@keyframes sway {
+  from { transform: translateX(-5px) rotate(-2deg); }
+  to { transform: translateX(5px) rotate(2deg); }
+}
+
+/* letting the last few lines settle down again */
+main > p:last-child {
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 40px;
+}
+
+/* these are the colors you see when you select text */
+::selection {
+  background: var(--highlight);
+  color: var(--ink);
+}
+
+/* keeping the author credit simple, underneath the title */
+.byline {
+  color: var(--accent);
+}
+
+/* making the highlighted bits feel like scraps pasted onto the page */
+.rhythm,
+.refrain {
+  box-shadow: 5px 5px 0 var(--highlight);
+}
+
+/* bold words inside the dark paper need the light ink too */
+.rhythm b,
+.rhythm em {
+  color: var(--paper);
+}
+
+/* five simple squares, each matching the colors of its poem */
+.home-page {
+  background: #fff;
+  color: #292e25;
+  border-top: 0;
+}
+
+/* flex-wrap moves squares onto another row when they run out of room */
+.home-page .poem-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 36px 48px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 70px 24px 100px;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+/* aspect-ratio keeps these square; flex stacks the title above the author */
+.poem-square {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  aspect-ratio: 1;
+  width: 240px;
+  max-width: 100%;
+  min-width: 0;
+  padding: 28px;
+  border: 1px solid #292e2533;
+  color: var(--tile-ink);
+  background-color: var(--tile-paper);
+  text-decoration: none;
+  transition: box-shadow 180ms ease;
+}
+
+/* an inset shadow draws the hover border inside, so the square does not shift */
+.poem-square:hover,
+.poem-square:focus-visible {
+  background-color: var(--tile-paper);
+  box-shadow: inset 0 0 0 4px var(--tile-ink);
+  outline: none;
+}
+
+/* each square has its own pair of colors, used by the shared square styles */
+.square-dance { --tile-paper: #dec3c8; --tile-ink: #245b46; }
+.square-accents { --tile-paper: #c6b4d0; --tile-ink: #563064; }
+.square-gift { --tile-paper: #d3bb94; --tile-ink: #553921; }
+.square-flowers { --tile-paper: #c6d493; --tile-ink: #374d27; }
+.square-real { --tile-paper: #243e6a; --tile-ink: #e3edf7; }
+
+/* titles are headings so the homepage still has a clear structure */
+.poem-square h2 {
+  margin: 0 0 18px;
+  font-size: 34px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+/* smaller sans-serif text separates the author from the poem title */
+.poem-square p {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* uneven spacing makes the squares feel arranged on a table */
+.square-dance { margin-top: 20px; }
+.square-accents { margin-top: 90px; }
+.square-gift { margin-top: 0; }
+.square-flowers { margin-top: 10px; }
+.square-real { margin-top: 65px; }
